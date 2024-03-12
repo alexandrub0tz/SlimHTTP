@@ -47,7 +47,44 @@ class AlunniController{
         return $response->withHeader('Content-Type', 'application/json')->withStatus(201); 
     }
 
+    function updateAlunno(Request $request, Response $response, $args){
+        $body = $request->getBody()->getContents();
+        $parsedBody = json_decode($body, true);
+        $classe = new Classe();
+        $nomeAlunnoDaTrovare = $args['nome'];
 
+        $alunno = $classe->trovaAlunno($nomeAlunnoDaTrovare);
+
+        if($alunno == null){
+            $response->getBody()->write("Alunno non trovato: " . $args['nome']);
+            return $response->withStatus(404);
+        
+        } else {
+            $alunno->setNome($parsedBody['nome']);
+            $alunno->setCognome($parsedBody['cognome']);
+            $alunno->setEta($parsedBody['eta']);
+            $response->getBody()->write($classe->toString());
+            return $response->withStatus(200);
+        }
+
+    }
+
+    function deleteAlunno(Request $request, Response $response, $args){
+        $classe = new Classe();
+        $utenteDaCancellare = $args['nome'];
+        $utente = $classe->trovaAlunno($utenteDaCancellare);
+
+        if($utente == null){
+            $response->getBody()->write("Alunno non trovato: " . $args['nome']);
+            return $response->withStatus(404);
+        } else {
+            $classe->eliminaAlunno($utenteDaCancellare);
+            $response->getBody()->write("Alunni: " . $classe->toString());
+            return $response->withStatus(200);
+        }
+        
+
+    }
     
     
 }

@@ -15,13 +15,21 @@ class Classe implements JsonSerializable {
 
 
     public function trovaAlunno($nome) {
-    foreach ($this->alunni as $alunno) {
-        if ($alunno->getNome() == $nome) {
-            return $alunno;
+        foreach ($this->alunni as $alunno) {
+            if ($alunno->getNome() == $nome) {
+                return $alunno;
+            }
+        }
+        return null; // Nessun alunno trovato con quel nome
+    }
+
+    public function eliminaAlunno($nome){
+        foreach($this->alunni as $chiave => $alunno ){
+            if($alunno->getNome() == $nome){
+                unset($this->alunni[$chiave]);
+            }
         }
     }
-    return null; // Nessun alunno trovato con quel nome
-}
 
 
     public function toString(){

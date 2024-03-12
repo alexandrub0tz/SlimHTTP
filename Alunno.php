@@ -12,6 +12,18 @@ class Alunno implements JsonSerializable{
         $this->eta = $eta;
     }
 
+    public function setNome($nome){
+        $this->nome = $nome;
+    }
+
+    public function setCognome($cognome){
+        $this->cognome = $cognome;
+    }
+
+    public function setEta($eta){
+        $this->eta = $eta;
+    }
+
     public function getNome(){
         return $this->nome;
     }

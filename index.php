@@ -8,8 +8,8 @@ use Slim\Factory\AppFactory;
 
 require __DIR__ . '/vendor/autoload.php';
 include_once 'Classe.php';
-include_once 'HomeController.php';
-include_once 'AlunniController.php';
+include_once 'controllers/HomeController.php';
+include_once 'controllers/AlunniController.php';
 
 $app = AppFactory::create();
 
@@ -20,7 +20,8 @@ $app->get('/alunni/{nome}', 'AlunniController:showAlunno');
 $app->get('/api/alunni', 'AlunniController:apiAlunni');
 $app->get('/api/alunni/{nome}', 'AlunniController:apiAlunno');
 $app->post('/alunni', 'AlunniController:createAlunno');
-
+$app->put('/alunni/{nome}', 'AlunniController:updateAlunno');
+$app->delete('/alunni/{nome}', 'AlunniController:deleteAlunno');
 
 $app->run();
 
